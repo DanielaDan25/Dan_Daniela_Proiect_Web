@@ -1,0 +1,48 @@
+﻿@page
+@model Dan_Daniela_Proiect_Web.Pages.Comenzi.IndexModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-page="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Comanda[0].Client)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Comanda[0].Shoe)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Comanda[0].ExpediereData)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.Comanda) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Client.ID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Shoe.ID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ExpediereData)
+            </td>
+            <td>
+                <a asp-page="./Edit" asp-route-id="@item.ID">Edit</a> |
+                <a asp-page="./Details" asp-route-id="@item.ID">Details</a> |
+                <a asp-page="./Delete" asp-route-id="@item.ID">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

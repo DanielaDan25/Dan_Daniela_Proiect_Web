@@ -1,0 +1,81 @@
+﻿@page
+@model Dan_Daniela_Proiect_Web.Pages.Shoes.EditModel
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Edit</h1>
+
+<h4>Shoe</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Shoe.ID" />
+            <div class="form-group">
+                <label asp-for="Shoe.Denumire" class="control-label"></label>
+                <input asp-for="Shoe.Denumire" class="form-control" />
+                <span asp-validation-for="Shoe.Denumire" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Shoe.BrandID" class="control-label">Brand Name</label>
+                <select asp-for="Shoe.BrandID" class="form-control" asp-items="ViewBag.BrandID">
+                </select>
+                <span asp-validation-for="Shoe.BrandID" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Shoe.Pret" class="control-label"></label>
+                <input asp-for="Shoe.Pret" class="form-control" />
+                <span asp-validation-for="Shoe.Pret" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Shoe.Descriere" class="control-label"></label>
+                <input asp-for="Shoe.Descriere" class="form-control" />
+                <span asp-validation-for="Shoe.Descriere" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+ <div class="table">
+ <table>
+ <tr>
+ @{
+ int cnt = 0;
+ foreach (var cat in Model.AssignedCategoryDataList)
+{
+ if (cnt++ % 3 == 0)
+{
+@:</tr><tr>
+}
+@:<td>
+ <input type="radio"
+ name="selectedCategories"
+ value="@cat.CategoryID"
+ @(Html.Raw(cat.Assigned ?
+"checked=\"checked\"" : "")) />
+ @cat.CategoryID @: @cat.Name
+ @:</td>
+ }
+ @:</tr>
+}
+ </table>
+ </div>
+ </div>
+
+            
+
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-page="./Index">Back to Shop </a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
